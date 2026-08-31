@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gleb — Causal Inference &amp; Experimentation</title>
+<meta name="description" content="Product analyst &amp; data scientist specializing in causal inference and experimentation platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="wordmark" href="#top">Gleb<span class="wordmark-dot">.</span></a>
+    <nav class="nav">
+      <a href="#projects">Проекты</a>
+      <a href="#experience">Опыт</a>
+      <a href="#skills">Навыки</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-text">
+      <p class="role-line">Product Analyst &amp; Data Scientist</p>
+      <h1>Причинно-следственные выводы для продуктов,<br>которым нужны настоящие ответы.</h1>
+      <p class="hero-sub">
+        Занимаюсь экспериментированием и causal inference: sequential testing, variance reduction,
+        difference-in-differences. Сейчас — Lead Anti-Fraud Analyst в Banco Plata (Мехико)
+        и Causal Inference Research Consultant в VkusVill (удалённо).
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:you@example.com">Написать</a>
+        <a class="btn btn-ghost" href="resume.pdf">Резюме</a>
+        <a class="btn btn-ghost" href="https://github.com/yourusername">GitHub</a>
+      </div>
+    </div>
+
+    <aside class="readout" aria-hidden="true">
+      <div class="readout-head">
+        <span class="readout-label">experiment readout</span>
+        <span class="readout-status">significant</span>
+      </div>
+      <div class="readout-metric">
+        <span class="readout-value">+6.0%</span>
+        <span class="readout-caption">uplift обнаружен BSTS-фреймворком<br>по 11 тестам, ранее не замечен</span>
+      </div>
+      <div class="readout-bar">
+        <div class="bar-track">
+          <div class="bar-fill"></div>
+          <div class="bar-marker" style="left:22%"></div>
+        </div>
+        <div class="bar-labels">
+          <span>0</span>
+          <span class="mono">95% CI</span>
+          <span>эффект</span>
+        </div>
+      </div>
+      <div class="readout-foot">MLRATE · CUPED · mSPRT</div>
+    </aside>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about wrap" id="about">
+    <div class="about-grid">
+      <h2>О себе</h2>
+      <div class="about-body">
+        <p>
+          Я строю и внедряю инфраструктуру экспериментирования: от снижения дисперсии
+          (CUPED, MLRATE, CUPAC) до последовательного тестирования (anytime-valid inference, mSPRT)
+          и дизайнов вроде synthetic control и staggered DiD там, где A/B-тест невозможен.
+        </p>
+        <p>
+          До этого возглавлял аналитику и product security analytics в HeadHunter (hh.ru),
+          был продуктовым аналитиком в OZON.ru и VseInstrumenti.ru. Учился прикладной математике
+          и физике в МФТИ, затем — data engineering в НИУ ВШЭ.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects wrap" id="projects">
+    <h2>Проекты</h2>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>Фиксированный горизонт + CUPED достаточно точно оценивают эффект в быстрых экспериментах.</p>
+      </div>
+      <div class="project-body">
+        <h3>Sequential testing поверх regression adjustment</h3>
+        <p>
+          Платформа A/B-тестирования, объединяющая betting-based anytime-valid inference (mSPRT)
+          с MLRATE regression adjustment: fixed-horizon тест с MLRATE как основной OEC,
+          AVI — как guardrail-слой для раннего обнаружения вреда. Реализован и провалидирован
+          на Monte Carlo харнессе с калибровкой по неравенству Виля.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>Гейт на раннем обнаружении вреда сокращает время реакции без потери валидности теста.</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>Наблюдаемый uplift в тестах быстрой доставки отражает реальный эффект.</p>
+      </div>
+      <div class="project-body">
+        <h3>Synthetic control framework, VkusVill</h3>
+        <p>
+          Peer review исследования влияния fast-delivery выявил selection bias и противоречивые
+          выводы. Пересобрал дизайн на pooled SCM — фреймворк убрал <span class="mono">12%</span>
+          фантомного uplift и вскрыл ранее не обнаруженный реальный эффект.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>Часть эффекта — артефакт неверной группы сравнения; реальный эффект меньше, но устойчив.</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>Стандартный event-study DiD корректно оценивает эффект при staggered rollout.</p>
+      </div>
+      <div class="project-body">
+        <h3>Staggered DiD redesign, Banco Plata</h3>
+        <p>
+          Внедрил BSTS-фреймворк и предложил редизайн на Callaway–Sant'Anna для тестов
+          с разновременным раскатыванием, где TWFE даёт смещённые оценки из-за
+          negative weighting уже пролеченных когорт.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>BSTS-фреймворк вскрыл <span class="mono">6%</span> ранее не обнаруженного uplift по 11 тестам.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills wrap" id="skills">
+    <h2>Навыки</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Causal inference</h3>
+        <p>CUPED / MLRATE / CUPAC, sequential testing (mSPRT, AVI), DML, IV/LATE, synthetic control, staggered DiD, BSTS</p>
+      </div>
+      <div class="skill-group">
+        <h3>Инструменты</h3>
+        <p>Python (numpy, pandas, statsmodels), SQL, экспериментальные пайплайны, Monte Carlo симуляции</p>
+      </div>
+      <div class="skill-group">
+        <h3>Домены</h3>
+        <p>Fraud &amp; risk, e-commerce, retail delivery, product security, HR-tech</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience wrap" id="experience">
+    <h2>Опыт</h2>
+    <ul class="timeline">
+      <li>
+        <div class="timeline-role">
+          <h3>Lead Anti-Fraud Analyst</h3>
+          <span class="mono">Banco Plata · Mexico City</span>
+        </div>
+        <p>Сейчас</p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Causal Inference Research Consultant</h3>
+          <span class="mono">VkusVill · удалённо</span>
+        </div>
+        <p>Сейчас</p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Head of Analytics / Head of Product Security Analytics</h3>
+          <span class="mono">HeadHunter (hh.ru)</span>
+        </div>
+        <p></p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Product Analyst</h3>
+          <span class="mono">OZON.ru</span>
+        </div>
+        <p></p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Product Analyst</h3>
+          <span class="mono">VseInstrumenti.ru</span>
+        </div>
+        <p></p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact wrap" id="contact">
+    <h2>Контакты</h2>
+    <p class="contact-lead">Открыт к ролям в experimentation platform и senior DS.</p>
+    <div class="contact-links">
+      <a href="mailto:you@example.com">you@example.com</a>
+      <a href="https://github.com/yourusername">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <span>МФТИ · НИУ ВШЭ</span>
+  <span>Mexico City</span>
+</footer>
+
+</body>
+</html>
