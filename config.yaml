@@ -1,0 +1,21 @@
+title: "Gleb Poleshchuk — Causal Inference & Experimentation"
+description: "Product analyst & data scientist specializing in causal inference and experimentation platforms."
+# If this repo is served at username.github.io/reponame, set baseurl to "/reponame".
+# If it's served at username.github.io (a user site, repo named exactly that), leave baseurl empty.
+url: "https://tymerrit.github.io"
+baseurl: ""
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+permalink: /blog/:title/
+
+plugins:
+  - jekyll-feed
+
+exclude:
+  - README.md
