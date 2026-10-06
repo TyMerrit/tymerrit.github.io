@@ -6,8 +6,6 @@ excerpt: "Every textbook A/B test is a contract: pick N in advance, wait, look o
 image: /images/posts/ab-test-agreement.png
 ---
 
-![A mock "A/B Test Agreement" contract: each clause crossed out and annotated with how it actually broke — checked on day 2, MDE set by available traffic, novelty wore off in week 3, a 50.8/49.2 sample ratio mismatch — stamped "SHIPPED" anyway.](/images/posts/ab-test-agreement.png){: .post-hero }
-
 Every textbook A/B test is a contract: pick N in advance, wait, look once.
 
 And almost nobody keeps it. The dashboard refreshes hourly. Someone asks "is it significant yet?" on day two. The test gets stopped early because the numbers look good or, what is more common, look bad.
@@ -22,3 +20,5 @@ Here is what it quietly assumes, and where each assumption breaks:
 4. **Clean randomization and logging.** Production disagrees: sample ratio mismatch from bots or redirects, users seeing both variants across devices, exposure logged differently per arm. The math holds; the data doesn't.
 
 None of these are failures of discipline. Each one is a gap between what the textbook A/B test assumes and how experiments actually run. The answer isn't stricter rules for the old contract — it's a contract that fits reality.
+
+![A mock "A/B Test Agreement" contract: each clause crossed out and annotated with how it actually broke — checked on day 2, MDE set by available traffic, novelty wore off in week 3, a 50.8/49.2 sample ratio mismatch — stamped "SHIPPED" anyway.](/images/posts/ab-test-agreement.png){: .post-hero }

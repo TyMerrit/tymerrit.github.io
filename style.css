@@ -684,7 +684,7 @@ section h2 {
 .post-content img.post-hero {
   display: block;
   max-width: 320px;
-  margin: 0 auto 32px;
+  margin: 32px auto 0;
 }
 
 @media (max-width: 480px) {
