@@ -485,7 +485,7 @@ section h2 {
   .wrap { padding: 0 20px; }
   .header-row { height: 56px; }
   .nav a { font-size: 0.85rem; }
-  .post-list-thumb { width: 64px; height: 64px; }
+  .post-list-thumb { width: 48px; height: 48px; }
 }
 
 /* BLOG LIST */
@@ -523,12 +523,13 @@ section h2 {
 .post-list-link {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
 }
 
 .post-list-thumb {
-  width: 96px;
-  height: 96px;
+  width: 64px;
+  height: 64px;
   object-fit: cover;
   border-radius: 4px;
   border: 1px solid var(--line);
@@ -678,6 +679,12 @@ section h2 {
 .post-content img {
   max-width: 100%;
   border-radius: 4px;
+}
+
+.post-content img.post-hero {
+  display: block;
+  max-width: 320px;
+  margin: 0 auto 32px;
 }
 
 @media (max-width: 480px) {
