@@ -2,7 +2,10 @@
 layout: post
 title: "The A/B test contract nobody keeps"
 date: 2026-10-06
+excerpt: "Every textbook A/B test is a contract: pick N in advance, wait, look once. And almost nobody keeps it."
 ---
+
+![A mock "A/B Test Agreement" contract: each clause crossed out and annotated with how it actually broke — checked on day 2, MDE set by available traffic, novelty wore off in week 3, a 50.8/49.2 sample ratio mismatch — stamped "SHIPPED" anyway.](/images/posts/ab-test-agreement.png)
 
 Every textbook A/B test is a contract: pick N in advance, wait, look once.
 
