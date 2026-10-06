@@ -667,3 +667,43 @@ section h2 {
 @media (max-width: 480px) {
   .post { padding-top: 40px; }
 }
+
+/* ROUGE SYNTAX HIGHLIGHTING */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs { color: #7A8591; font-style: italic; }
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
+.highlight .kp, .highlight .kr, .highlight .kt, .highlight .ow,
+.highlight .na, .highlight .nt { color: #6FA88A; }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb,
+.highlight .sc, .highlight .sd, .highlight .se, .highlight .sh,
+.highlight .si, .highlight .sx, .highlight .sr, .highlight .ss { color: #D1B37A; }
+.highlight .nf, .highlight .fm, .highlight .nc { color: #8FB8D8; }
+.highlight .nb, .highlight .bp, .highlight .m, .highlight .mf,
+.highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color: #C97B63; }
+.highlight .err { color: #D97069; }
+.highlight .gh, .highlight .gu { color: var(--muted); }
+
+/* 404 */
+.not-found {
+  padding: 120px 0 140px;
+  text-align: center;
+}
+
+.not-found > .mono {
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.not-found h1 {
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  margin-bottom: 16px;
+}
+
+.not-found-sub {
+  color: var(--muted);
+  margin: 0 0 32px;
+}
+
+.not-found .btn {
+  display: inline-block;
+}
