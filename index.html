@@ -10,8 +10,13 @@ title: Blog
     {% for post in site.posts %}
     <li>
       <a class="post-list-link" href="{{ post.url | relative_url }}">
-        <span class="post-list-date mono">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <span class="post-list-title">{{ post.title }}</span>
+        {% if post.image %}
+        <img class="post-list-thumb" src="{{ post.image | relative_url }}" alt="">
+        {% endif %}
+        <span class="post-list-heading">
+          <span class="post-list-date mono">{{ post.date | date: "%b %-d, %Y" }}</span>
+          <span class="post-list-title">{{ post.title }}</span>
+        </span>
       </a>
       {% if post.excerpt %}
       <p class="post-list-excerpt">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
