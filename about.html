@@ -1,0 +1,190 @@
+---
+layout: default
+title: About
+permalink: /about/
+---
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-text">
+      <p class="role-line">Product Analyst &amp; Data Scientist</p>
+      <h1>Causal inference for products<br>that need real answers.</h1>
+      <p class="hero-sub">
+        I work on experimentation and causal inference: sequential testing, variance reduction,
+        difference-in-differences. Currently Lead Anti-Fraud Analyst at Banco Plata (Mexico City)
+        and Causal Inference Research Consultant at VkusVill (remote).
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:poleshchukga@gmail.com">Get in touch</a>
+        <a class="btn btn-ghost" href="{{ '/resume.pdf' | relative_url }}">Resume</a>
+        <a class="btn btn-ghost" href="https://github.com/tymerrit">GitHub</a>
+      </div>
+    </div>
+
+    <aside class="readout" aria-hidden="true">
+      <div class="readout-head">
+        <span class="readout-label">experiment readout</span>
+        <span class="readout-status">significant</span>
+      </div>
+      <div class="readout-metric">
+        <span class="readout-value">+6.0%</span>
+        <span class="readout-caption">uplift found by a BSTS framework<br>across 11 tests, previously undetected</span>
+      </div>
+      <div class="readout-bar">
+        <div class="bar-track">
+          <div class="bar-fill"></div>
+          <div class="bar-marker" style="left:22%"></div>
+        </div>
+        <div class="bar-labels">
+          <span>0</span>
+          <span class="mono">95% CI</span>
+          <span>effect</span>
+        </div>
+      </div>
+      <div class="readout-foot">MLRATE · CUPED · mSPRT</div>
+    </aside>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about wrap" id="about">
+    <div class="about-grid">
+      <h2>About</h2>
+      <div class="about-body">
+        <p>
+          I build and ship experimentation infrastructure: variance reduction
+          (CUPED, MLRATE, CUPAC), sequential testing (anytime-valid inference, mSPRT),
+          and designs like synthetic control and staggered DiD for cases where a clean
+          A/B test isn't possible.
+        </p>
+        <p>
+          Previously led Analytics and Product Security Analytics at HeadHunter (hh.ru),
+          and worked as a product analyst at OZON.ru and VseInstrumenti.ru. Studied applied
+          mathematics and physics at MIPT, then data engineering at HSE University.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects wrap" id="projects">
+    <h2>Projects</h2>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>Fixed-horizon testing plus CUPED estimates effects accurately enough for fast-moving experiments.</p>
+      </div>
+      <div class="project-body">
+        <h3>Sequential testing on top of regression adjustment</h3>
+        <p>
+          An A/B testing platform combining betting-based anytime-valid inference (mSPRT)
+          with MLRATE regression adjustment: a fixed-horizon test with MLRATE as the primary OEC,
+          AVI as a guardrail layer for early harm detection. Implemented and validated against
+          a Monte Carlo harness with Ville's-inequality calibration checks.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>An early-harm-detection gate cuts reaction time without sacrificing test validity.</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>The observed uplift in fast-delivery tests reflects a genuine causal effect.</p>
+      </div>
+      <div class="project-body">
+        <h3>Synthetic control framework, VkusVill</h3>
+        <p>
+          Peer review of a fast-delivery impact study surfaced selection bias and contradictory
+          conclusions. Redesigned the analysis on pooled SCM — the framework removed
+          <span class="mono">12%</span> of phantom uplift and surfaced a genuine effect that had
+          gone undetected.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>Part of the effect was an artifact of a flawed comparison group; the real effect is smaller but robust.</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>A standard event-study DiD correctly estimates the effect under staggered rollout.</p>
+      </div>
+      <div class="project-body">
+        <h3>Staggered DiD redesign, Banco Plata</h3>
+        <p>
+          Introduced a BSTS framework and proposed a redesign around Callaway–Sant'Anna for
+          tests with staggered rollout, where TWFE produces biased estimates due to
+          negative weighting of already-treated cohorts.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>The BSTS framework surfaced <span class="mono">6%</span> of previously undetected uplift across 11 tests.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills wrap" id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Causal inference</h3>
+        <p>CUPED / MLRATE / CUPAC, sequential testing (mSPRT, AVI), DML, IV/LATE, synthetic control, staggered DiD, BSTS</p>
+      </div>
+      <div class="skill-group">
+        <h3>Tools</h3>
+        <p>Python (numpy, pandas, statsmodels), SQL, experimentation pipelines, Monte Carlo simulation</p>
+      </div>
+      <div class="skill-group">
+        <h3>Domains</h3>
+        <p>Fraud &amp; risk, e-commerce, retail delivery, product security, HR-tech</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience wrap" id="experience">
+    <h2>Experience</h2>
+    <ul class="timeline">
+      <li>
+        <div class="timeline-role">
+          <h3>Lead Anti-Fraud Analyst</h3>
+          <span class="mono">Banco Plata · Mexico City</span>
+        </div>
+        <p>Present</p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Causal Inference Research Consultant</h3>
+          <span class="mono">VkusVill · Remote</span>
+        </div>
+        <p>Present</p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Head of Analytics / Head of Product Security Analytics</h3>
+          <span class="mono">HeadHunter (hh.ru)</span>
+        </div>
+        <p></p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Product Analyst</h3>
+          <span class="mono">OZON.ru</span>
+        </div>
+        <p></p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Product Analyst</h3>
+          <span class="mono">VseInstrumenti.ru</span>
+        </div>
+        <p></p>
+      </li>
+    </ul>
+  </section>
