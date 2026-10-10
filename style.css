@@ -683,7 +683,7 @@ section h2 {
 
 .post-content img.post-hero {
   display: block;
-  max-width: 420px;
+  width: 100%;
   margin: 32px auto 0;
 }
 
