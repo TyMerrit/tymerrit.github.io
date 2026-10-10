@@ -37,7 +37,7 @@ The fix here is boring: checks. For something like SRM, a basic Pearson chi-squa
 
 The next place a lot of teams fail is design. That covers how long the test runs and what minimum effect it can detect, both of which you calculate *before* launch, not after. But the question I see skipped most often comes even earlier: can you randomize here at all, and at what level?
 
-Take network effects. On a job search platform, a marketplace or a social network, users interact with each other, so treating one user changes outcomes for others. Randomize by user and your estimate is biased. Sometimes the fix is to randomize at a higher level: clusters, regions, or time slots with switchback designs. Sometimes even that isn't possible, and you need observational methods: diff-in-diff, synthetic control, CausalImpact, which is built on BSTS.
+Take network effects. On a job search platform, a marketplace or a social network, users interact with each other, so treating one user changes outcomes for others. Randomize by user and your estimate is biased. Sometimes the fix is to randomize at a higher level: clusters, regions, or time slots with switchback designs. Sometimes even that isn't possible, and you need observational methods: diff-in-diff, synthetic control, CausalImpact.
 
 This one isn't from my own work. It happened at a large social network, which I won't name. They launched stickers, big animated emojis, and decided a classic user-level A/B test was fine. Then a user in treatment, who had stickers, sent one to a friend in control, who didn't. Control was no longer control: it was being exposed to the feature through its friends. And the treatment effect depended on whether your friends happened to land in treatment too. A textbook network effect.
 
