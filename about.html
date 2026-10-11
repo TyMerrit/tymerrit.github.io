@@ -9,8 +9,8 @@ permalink: /about/
       <p class="role-line">Product Analyst &amp; Data Scientist</p>
       <h1>Causal inference for products<br>that need real answers.</h1>
       <p class="hero-sub">
-        I work on experimentation and causal inference: sequential testing, variance reduction,
-        difference-in-differences. Currently Lead Anti-Fraud Analyst at Banco Plata (Mexico City)
+        I work on experimentation and causal inference: variance reduction, synthetic control,
+        Bayesian structural time series. Currently Lead Product Analyst at Banco Plata (Mexico City)
         and Causal Inference Research Consultant at VkusVill (remote).
       </p>
       <div class="hero-actions">
@@ -39,7 +39,7 @@ permalink: /about/
           <span>effect</span>
         </div>
       </div>
-      <div class="readout-foot">MLRATE · CUPED · mSPRT</div>
+      <div class="readout-foot">BSTS · SCM · CUPED · MLRATE</div>
     </aside>
   </section>
 
@@ -49,15 +49,16 @@ permalink: /about/
       <h2>About</h2>
       <div class="about-body">
         <p>
-          I build and ship experimentation infrastructure: variance reduction
-          (CUPED, MLRATE, CUPAC), sequential testing (anytime-valid inference, mSPRT),
-          and designs like synthetic control and staggered DiD for cases where a clean
-          A/B test isn't possible.
+          4+ years and 100+ A/B tests across two-sided marketplaces. I build the systems that
+          make experimentation trustworthy: variance reduction (CUPED, MLRATE), sequential
+          testing, automated SRM checks, and designs like synthetic control and BSTS for cases
+          where a clean A/B test isn't possible.
         </p>
         <p>
-          Previously led Analytics and Product Security Analytics at HeadHunter (hh.ru),
-          and worked as a product analyst at OZON.ru and VseInstrumenti.ru. Studied applied
-          mathematics and physics at MIPT, then data engineering at HSE University.
+          Previously led product analytics at HeadHunter (hh.ru) and worked as a product analyst
+          at OZON.ru. Taught a two-year course on product analytics and A/B testing at Moscow State
+          University and spoke at Matemarketing 2024. Studied applied mathematics and physics at
+          MIPT, then data engineering at HSE University.
         </p>
       </div>
     </div>
@@ -70,54 +71,69 @@ permalink: /about/
     <article class="project">
       <div class="project-hypo">
         <span class="tag tag-h0">H0</span>
-        <p>Fixed-horizon testing plus CUPED estimates effects accurately enough for fast-moving experiments.</p>
+        <p>A three-week fixed-horizon test is the price of a trustworthy answer.</p>
       </div>
       <div class="project-body">
-        <h3>Sequential testing on top of regression adjustment</h3>
+        <h3>Variance reduction and sequential testing, HeadHunter</h3>
         <p>
-          An A/B testing platform combining betting-based anytime-valid inference (mSPRT)
-          with MLRATE regression adjustment: a fixed-horizon test with MLRATE as the primary OEC,
-          AVI as a guardrail layer for early harm detection. Implemented and validated against
-          a Monte Carlo harness with Ville's-inequality calibration checks.
+          CUPED with gradient-boosted covariate prediction, MLRATE with cross-fitted variance
+          reduction and HC1 robust standard errors, and a group sequential framework for
+          statistically valid early stopping — rolled out across 300+ tests.
         </p>
       </div>
       <div class="project-hypo project-h1">
         <span class="tag tag-h1">H1</span>
-        <p>An early-harm-detection gate cuts reaction time without sacrificing test validity.</p>
+        <p>The same tests reach a valid decision in <span class="mono">1</span> week instead of <span class="mono">3</span>.</p>
       </div>
     </article>
 
     <article class="project">
       <div class="project-hypo">
         <span class="tag tag-h0">H0</span>
-        <p>The observed uplift in fast-delivery tests reflects a genuine causal effect.</p>
+        <p>Tightening anti-fraud rules is a precision trade-off you can only judge by eye.</p>
+      </div>
+      <div class="project-body">
+        <h3>Causal validation of anti-fraud rules, Banco Plata</h3>
+        <p>
+          Every anti-fraud rule change goes through rigorous causal validation, on top of a
+          standardized A/B testing pipeline with CUPED-based variance reduction and automated
+          SRM and novelty/primacy checks.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>More precise rules cut company-wide fraud losses by <span class="mono">14%</span> (~$2M a year).</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>The prior methodology measures retail store performance correctly.</p>
       </div>
       <div class="project-body">
         <h3>Synthetic control framework, VkusVill</h3>
         <p>
-          Peer review of a fast-delivery impact study surfaced selection bias and contradictory
-          conclusions. Redesigned the analysis on pooled SCM — the framework removed
-          <span class="mono">12%</span> of phantom uplift and surfaced a genuine effect that had
-          gone undetected.
+          A production Synthetic Control Method framework for retail store performance,
+          replacing the prior methodology's comparison groups.
         </p>
       </div>
       <div class="project-hypo project-h1">
         <span class="tag tag-h1">H1</span>
-        <p>Part of the effect was an artifact of a flawed comparison group; the real effect is smaller but robust.</p>
+        <p>It corrected <span class="mono">12%</span> of phantom uplift and surfaced <span class="mono">4%</span> of genuine uplift that had gone undetected.</p>
       </div>
     </article>
 
     <article class="project">
       <div class="project-hypo">
         <span class="tag tag-h0">H0</span>
-        <p>A standard event-study DiD correctly estimates the effect under staggered rollout.</p>
+        <p>Last-mile delivery experiments with no significant effect had no effect.</p>
       </div>
       <div class="project-body">
-        <h3>Staggered DiD redesign, VkusVill</h3>
+        <h3>BSTS for last-mile delivery, VkusVill</h3>
         <p>
-          Introduced a BSTS framework and proposed a redesign around Callaway–Sant'Anna for
-          tests with staggered rollout, where TWFE produces biased estimates due to
-          negative weighting of already-treated cohorts.
+          A Bayesian Structural Time Series framework for last-mile delivery experiments,
+          where clean user-level randomization isn't available.
         </p>
       </div>
       <div class="project-hypo project-h1">
@@ -133,15 +149,15 @@ permalink: /about/
     <div class="skills-grid">
       <div class="skill-group">
         <h3>Causal inference</h3>
-        <p>CUPED / MLRATE / CUPAC, sequential testing (mSPRT, AVI), DML, IV/LATE, synthetic control, staggered DiD, BSTS</p>
+        <p>A/B testing, sample size &amp; power analysis, CUPED, MLRATE, sequential testing, difference-in-differences, synthetic control, BSTS</p>
       </div>
       <div class="skill-group">
         <h3>Tools</h3>
-        <p>Python (numpy, pandas, statsmodels), SQL, experimentation pipelines, Monte Carlo simulation</p>
+        <p>Python (pandas, numpy, scipy, statsmodels), SQL, dbt, Airflow, Snowflake, Databricks, Superset, Tableau, Streamlit</p>
       </div>
       <div class="skill-group">
         <h3>Domains</h3>
-        <p>Fraud &amp; risk, e-commerce, retail delivery, product security, HR-tech</p>
+        <p>Fintech &amp; fraud, marketplaces, retail &amp; delivery, HR-tech</p>
       </div>
     </div>
   </section>
@@ -152,38 +168,31 @@ permalink: /about/
     <ul class="timeline">
       <li>
         <div class="timeline-role">
-          <h3>Lead Anti-Fraud Analyst</h3>
+          <h3>Lead Product Analyst</h3>
           <span class="mono">Banco Plata · Mexico City</span>
         </div>
-        <p>Present</p>
+        <p>Mar 2026 – Present</p>
       </li>
       <li>
         <div class="timeline-role">
           <h3>Causal Inference Research Consultant</h3>
           <span class="mono">VkusVill · Remote</span>
         </div>
-        <p>Present</p>
+        <p>Jun 2026 – Present</p>
       </li>
       <li>
         <div class="timeline-role">
-          <h3>Head of Analytics / Head of Product Security Analytics</h3>
-          <span class="mono">HeadHunter (hh.ru)</span>
+          <h3>Product Analytics Team Lead</h3>
+          <span class="mono">HeadHunter (hh.ru) · Moscow</span>
         </div>
-        <p></p>
-      </li>
-      <li>
-        <div class="timeline-role">
-          <h3>Product Analyst</h3>
-          <span class="mono">OZON.ru</span>
-        </div>
-        <p></p>
+        <p>Oct 2023 – Apr 2026</p>
       </li>
       <li>
         <div class="timeline-role">
           <h3>Product Analyst</h3>
-          <span class="mono">VseInstrumenti.ru</span>
+          <span class="mono">OZON.ru · Moscow</span>
         </div>
-        <p></p>
+        <p>Sep 2022 – Oct 2023</p>
       </li>
     </ul>
   </section>
