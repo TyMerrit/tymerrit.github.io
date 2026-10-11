@@ -9,13 +9,13 @@ image: /images/posts/experimentation-hierarchy-of-needs.png
 
 Let's be honest: most teams running A/B tests don't need CUPED, ML-based variance reduction or anytime-valid inference. Which is a bit awkward, because that's exactly what I want this blog to be about. Well, almost: one of those three turns out to be most useful for exactly the teams that seem to need it least. We'll get there.
 
-Here's the real problem. Most teams' experiments don't fall apart because they need to cut test duration in half, or anything like that. Nope. They fall apart on the basics. On infrastructure: randomization, SRM checks. On design: the analyst doesn't realize an A/B test simply doesn't work for this particular case. On metrics: we measure something we don't actually care about, and end up without an answer to the question we were asking in the first place. And on decisions: the numbers come in, and nobody agreed beforehand what they'd mean.
-
 None of these fancy methods are wrong. You can absolutely use them. The catch is that using them *correctly* takes a level of control that most teams running A/B tests simply don't have.
 
-And the saddest part: in my own work I've seen the "but this is how Netflix does it" syndrome over and over. Or Google, or Amazon, or whoever's cool this year. Let's do fancy stuff in our A/B tests, because that's what the cool companies do. Except most analysts don't really know what it would actually take to implement the ideas they're so excited about. And to be clear: it works at Netflix because they closed the lower levels years ago. That part rarely makes it into the conference talks.
-
 I once worked with a team running offline A/B tests with a really sophisticated randomization scheme: rerandomization, backed by a whole pile of papers. On paper it looked great. The problem was that they analyzed the results as if it were a plain randomized test, with the standard variance formula. That formula ignores the balancing step, so it overstates the variance. They paid for all that complexity to get more precise tests, then threw the precision away at the analysis stage, and kept wondering why nothing ever came out significant.
+
+And that's not a one-off. In my own work I've seen the "but this is how Netflix does it" syndrome over and over. Or Google, or Amazon, or whoever's cool this year. Let's do fancy stuff in our A/B tests, because that's what the cool companies do. Except most analysts don't really know what it would actually take to implement the ideas they're so excited about. And to be clear: it works at Netflix because they closed the lower levels years ago. That part rarely makes it into the conference talks.
+
+Those lower levels are where most experiments actually fall apart. Not because someone needs to cut test duration in half, or anything like that. They fall apart on the basics. On infrastructure: randomization, SRM checks. On design: the analyst doesn't realize an A/B test simply doesn't work for this particular case. On metrics: we measure something we don't actually care about, and end up without an answer to the question we were asking in the first place. And on decisions: the numbers come in, and nobody agreed beforehand what they'd mean.
 
 Personally, I think of experimentation as a hierarchy of requirements: randomization and data quality, design, metrics, decisions, methods. Roughly speaking, if you can't close one level, the next one won't give you honest answers. The order isn't perfectly strict, and you'll see one exception below, but it's close. And here's the thing: which of the first four levels you're stuck on has nothing to do with how big your company is. It barely depends on how many analysts you have or how much they know. It depends entirely on how mature your methodology is, and how much effort you've put into getting things right. A team running five tests a year can sit higher than one running five thousand.
 
@@ -25,11 +25,11 @@ Personally, I think of experimentation as a hierarchy of requirements: randomiza
 
 The most basic thing you need before you can run a correct A/B test at all is randomization quality. You planned a 60/40 split, and your A/B platform actually gives you 60/40. You don't run into sample ratio mismatch, or if you do, you have checks that catch it. You don't see any other weirdness in assignment either, like everyone on one particular browser version suddenly deciding to land in the treatment group. Until you can guarantee this, nothing else you might bolt onto your A/B tests will work. Randomization is the foundation.
 
-What else goes into this level? Assignment bugs, for one: the same user ending up in both treatment and control within a single experiment because something weird happened. Lost exposure events and lost logs in general, where we don't actually know how the user behaved, or whether they were ever exposed to the experiment at all.
-
 One team ran an A/B test and got a massive SRM: the treatment group was 20% smaller than control. Their first idea? Randomly trim 20% off the control group so the sizes match. When I pushed back, they switched to plan B: run an observational causal inference method on the same data instead.
 
 Both fixes miss the point. SRM means users went missing from treatment for some reason, and that reason almost certainly isn't random. Trimming control doesn't make the groups comparable again; it just hides the evidence. And no observational method can adjust for a selection mechanism you haven't even identified. The only real fix is to find out where those 20% went.
+
+What else goes into this level? Lost exposure events and lost logs in general, where we don't actually know how the user behaved, or whether they were ever exposed to the experiment at all. And assignment bugs: the same user ending up in both treatment and control within a single experiment because something weird happened.
 
 The fix here is boring: checks. For something like SRM, a basic Pearson chi-square test does the job, with a strict threshold like p < 0.001, since you run it on every test. Lost exposures come in two kinds. If both groups lose data at the same rate, you lose power. If one loses more than the other, you get bias, and it usually shows up as SRM. So the SRM check is your main detector here too, and pipeline monitoring covers the rest, the same way any decent DWH platform checks that nothing goes missing. And assignment bugs? Same thing, from the logs: check whether the same person showed up in different variants of the experiment at different points in time.
 
@@ -59,7 +59,7 @@ The remedy for both problems is the same as for design: write it down before lau
 
 The next level is whether a result actually turns into the right action. It looks like an org problem, but it has statistical roots.
 
-The saddest version I've seen was back when I was an intern analyst. A team ran a test with three variants. The split was supposed to be a third each. In reality it came out more like 30/30/40. And here's the ironic part: they made a real product decision based on that experiment, completely seriously. I told them the results couldn't be trusted. Naturally, nobody listens to the intern.
+The saddest version I've seen was back when I was an intern analyst. A team ran a test with three variants. The split was supposed to be a third each. In reality it came out more like 30/30/40. And here's the ironic part: they made a real product decision based on that experiment, completely seriously. I told them the results couldn't be trusted. Naturally, nobody listens to the intern. What broke was level 1. What failed was level 4: a result everyone could see was broken still turned into a decision.
 
 That one's extreme. The subtler failures look like this.
 
@@ -73,7 +73,7 @@ So: write the ship criteria down before the test starts (yes, in the same design
 
 ## Level 5: Methods
 
-And now we get to the part I actually want this blog to be about. It sits at the top for a reason: without a decision rule, a better method just gives you a more precise number to argue about. This is the stuff that keeps big tech researchers busy. Advanced methods that solve fairly narrow problems. Or not that narrow, but a lot less common. Heavy variance reduction, so you can run more tests on the same traffic or run the same tests much faster. Methods that systematically deal with peeking, or even turn it into an advantage for your platform. For example, using anytime-valid inference to monitor guardrail metrics, so if something is getting worse, you don't have to wait for the whole test to finish.
+And now we get to the part I actually want this blog to be about. It sits at the top for a reason: without a decision rule, a better method just gives you a more precise number to argue about. This is the stuff that keeps big tech researchers busy. Advanced methods that solve fairly narrow problems. Or not that narrow, but a lot less common. Heavy variance reduction, so you can run more tests on the same traffic or run the same tests much faster. Methods that systematically deal with peeking, or even turn it into an advantage for your platform. For example, adjusting for each user's pre-experiment behavior, so the same test needs noticeably less traffic.
 
 So the real question is when all this complicated methodology actually pays off. The threshold is simple: your experimentation platform's throughput is the bottleneck. When you have more hypotheses than you can test. When effects are small relative to metric noise. And that's exactly why these problems usually don't matter for startups and small, low-traffic companies, which, let's be honest, is where most analysts work. Low traffic sounds like exactly the case for variance reduction, but the effects worth chasing there are usually big, and the pre-period history that CUPED-style methods feed on is often missing anyway.
 
