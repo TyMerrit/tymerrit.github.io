@@ -514,17 +514,28 @@ section h2 {
 .post-list li {
   border-top: 1px solid var(--line);
   padding: 24px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .post-list li:first-child {
   border-top: none;
 }
 
+.post-list-text {
+  min-width: 0;
+}
+
 .post-list-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  display: block;
+}
+
+.post-list-thumb-link {
+  flex-shrink: 0;
+  line-height: 0;
+  margin-top: 4px;
 }
 
 .post-list-thumb {
