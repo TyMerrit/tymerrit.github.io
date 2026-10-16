@@ -16,6 +16,8 @@ Data can be syntactically valid: right schema, right types, no missing fields. I
 
 Everything below comes with code: a step-by-step validation pipeline you can point at your own experiment tables, plus a notebook that reproduces every number in this post. It's on GitHub: [ab-data-quality](https://github.com/tymerrit/ab-data-quality).
 
+![SRM is a race you can lose: as users per arm grow on a log scale, the A/B test reports a "−6% revenue!" fake effect long before the SRM check notices anything — the SRM curve stays near zero, "all good", until around 100k users per arm.](/images/posts/how-to-validate-your-randomization.png){: .post-hero }
+
 ## Three layers, three sources of truth
 
 Every experiment produces three streams of data: **assignment** (who was put in which variant), **exposure** (who actually saw it), and **outcome** (what they did). Each stream is its own source of truth, and a defect in one can be invisible in the others. Your assignment log can be perfectly balanced while your exposed population is skewed. Your exposures can be complete while half your outcomes haven't arrived yet.
