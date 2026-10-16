@@ -3,16 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% if page.title %}{{ page.title }} — Gleb{% else %}{{ site.title }}{% endif %}</title>
+{% if page.url == "/" %}{% assign full_title = site.title %}{% else %}{% assign full_title = page.title | append: " — Gleb Poleshchuk" %}{% endif %}
+<title>{{ full_title }}</title>
+<link rel="canonical" href="{{ page.url | absolute_url }}">
 <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{ site.title }}">
-<meta property="og:title" content="{% if page.title %}{{ page.title }} — Gleb{% else %}{{ site.title }}{% endif %}">
+<meta property="og:title" content="{{ full_title }}">
 <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 {% if page.image %}<meta property="og:image" content="{{ page.image | absolute_url }}">{% endif %}
 <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
-<meta name="twitter:title" content="{% if page.title %}{{ page.title }} — Gleb{% else %}{{ site.title }}{% endif %}">
+<meta name="twitter:title" content="{{ full_title }}">
 <meta name="twitter:description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
 {% if page.image %}<meta name="twitter:image" content="{{ page.image | absolute_url }}">{% endif %}
 <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
@@ -21,6 +23,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 {% feed_meta %}
+{% if page.url == "/" or page.url == "/about/" %}<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Gleb Poleshchuk",
+  "alternateName": "Глеб Полещук",
+  "jobTitle": "Lead Product Analyst",
+  "description": "{{ site.description }}",
+  "url": "{{ '/' | absolute_url }}",
+  "email": "mailto:poleshchukga@gmail.com",
+  "sameAs": ["https://linkedin.com/in/gleb-poleshchuk-65224a247"]
+}
+</script>{% endif %}
 <script>
   MathJax = {
     tex: {
