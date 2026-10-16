@@ -22,7 +22,7 @@ title: Blog
       </div>
       {% if post.image %}
       <a class="post-list-thumb-link" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
-        <img class="post-list-thumb" src="{{ post.image | relative_url }}" alt="">
+        <img class="post-list-thumb" src="{{ post.thumbnail | default: post.image | relative_url }}" alt="">
       </a>
       {% endif %}
     </li>
