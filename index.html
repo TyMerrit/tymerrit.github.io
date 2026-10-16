@@ -1,35 +1,197 @@
 ---
 layout: default
-title: Blog
+title: About
 ---
-<section class="blog-list wrap" id="blog">
-  <h1>Blog</h1>
-  <p class="blog-lead">Notes on causal inference, experimentation, and variance reduction.</p>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-    <li>
-      <div class="post-list-text">
-        <a class="post-list-link" href="{{ post.url | relative_url }}">
-          <span class="post-list-heading">
-            <span class="post-list-date mono">{{ post.date | date: "%b %-d, %Y" }}</span>
-            <span class="post-list-title">{{ post.title }}</span>
-          </span>
-        </a>
-        {% if post.excerpt %}
-        <p class="post-list-excerpt">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
-        {% endif %}
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-text">
+      <p class="role-line">Product Analyst &amp; Data Scientist</p>
+      <h1>Causal inference for products<br>that need real answers.</h1>
+      <p class="hero-sub">
+        I work on experimentation and causal inference: variance reduction, synthetic control,
+        Bayesian structural time series. Currently Lead Product Analyst at Banco Plata (Mexico City)
+        and Causal Inference Research Consultant at VkusVill (remote).
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:poleshchukga@gmail.com">Get in touch</a>
+        <a class="btn btn-ghost" href="{{ '/resume.pdf' | relative_url }}">Resume</a>
       </div>
-      {% if post.image %}
-      <a class="post-list-thumb-link" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
-        <img class="post-list-thumb" src="{{ post.thumbnail | default: post.image | relative_url }}" alt="">
-      </a>
-      {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+    </div>
 
-  {% if site.posts.size == 0 %}
-  <p class="blog-empty">No posts yet — add a markdown file to <span class="mono">_posts/</span> to get started.</p>
-  {% endif %}
-</section>
+    <aside class="readout" aria-hidden="true">
+      <div class="readout-head">
+        <span class="readout-label">experiment readout</span>
+        <span class="readout-status">significant</span>
+      </div>
+      <div class="readout-metric">
+        <span class="readout-value">+6.0%</span>
+        <span class="readout-caption">uplift found by a BSTS framework<br>across 11 tests, previously undetected</span>
+      </div>
+      <div class="readout-bar">
+        <div class="bar-track">
+          <div class="bar-fill"></div>
+          <div class="bar-marker" style="left:22%"></div>
+        </div>
+        <div class="bar-labels">
+          <span>0</span>
+          <span class="mono">95% CI</span>
+          <span>effect</span>
+        </div>
+      </div>
+      <div class="readout-foot">BSTS · SCM · CUPED · MLRATE</div>
+    </aside>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about wrap" id="about">
+    <div class="about-grid">
+      <h2>About</h2>
+      <div class="about-body">
+        <p>
+          4+ years and 100+ A/B tests across two-sided marketplaces. I build the systems that
+          make experimentation trustworthy: variance reduction (CUPED, MLRATE), sequential
+          testing, automated SRM checks, and designs like synthetic control and BSTS for cases
+          where a clean A/B test isn't possible.
+        </p>
+        <p>
+          Previously led product analytics at HeadHunter (hh.ru) and worked as a product analyst
+          at OZON.ru. Taught a two-year course on product analytics and A/B testing at Moscow State
+          University and spoke at Matemarketing 2024. Studied applied mathematics and physics at
+          MIPT, then data engineering at HSE University.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects wrap" id="projects">
+    <h2>Projects</h2>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>A three-week fixed-horizon test is the price of a trustworthy answer.</p>
+      </div>
+      <div class="project-body">
+        <h3>Variance reduction and sequential testing, HeadHunter</h3>
+        <p>
+          CUPED with gradient-boosted covariate prediction, MLRATE with cross-fitted variance
+          reduction and HC1 robust standard errors, and a group sequential framework for
+          statistically valid early stopping — rolled out across 300+ tests.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>The same tests reach a valid decision in <span class="mono">1</span> week instead of <span class="mono">3</span>.</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>Tightening anti-fraud rules is a precision trade-off you can only judge by eye.</p>
+      </div>
+      <div class="project-body">
+        <h3>Causal validation of anti-fraud rules, Banco Plata</h3>
+        <p>
+          Every anti-fraud rule change goes through rigorous causal validation, on top of a
+          standardized A/B testing pipeline with CUPED-based variance reduction and automated
+          SRM and novelty/primacy checks.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>More precise rules cut company-wide fraud losses by <span class="mono">14%</span> (~$2M a year).</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>The prior methodology measures retail store performance correctly.</p>
+      </div>
+      <div class="project-body">
+        <h3>Synthetic control framework, VkusVill</h3>
+        <p>
+          A production Synthetic Control Method framework for retail store performance,
+          replacing the prior methodology's comparison groups.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>It corrected <span class="mono">12%</span> of phantom uplift and surfaced <span class="mono">4%</span> of genuine uplift that had gone undetected.</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-hypo">
+        <span class="tag tag-h0">H0</span>
+        <p>Last-mile delivery experiments with no significant effect had no effect.</p>
+      </div>
+      <div class="project-body">
+        <h3>BSTS for last-mile delivery, VkusVill</h3>
+        <p>
+          A Bayesian Structural Time Series framework for last-mile delivery experiments,
+          where clean user-level randomization isn't available.
+        </p>
+      </div>
+      <div class="project-hypo project-h1">
+        <span class="tag tag-h1">H1</span>
+        <p>The BSTS framework surfaced <span class="mono">6%</span> of previously undetected uplift across 11 tests.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills wrap" id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Causal inference</h3>
+        <p>A/B testing, sample size &amp; power analysis, CUPED, MLRATE, sequential testing (mSPRT, AVI), difference-in-differences, synthetic control, BSTS</p>
+      </div>
+      <div class="skill-group">
+        <h3>Tools</h3>
+        <p>Python (pandas, numpy, scipy, statsmodels), SQL, dbt, Airflow, Snowflake, Databricks, Superset, Tableau, Streamlit</p>
+      </div>
+      <div class="skill-group">
+        <h3>Domains</h3>
+        <p>Fintech &amp; fraud, marketplaces, retail &amp; delivery, HR-tech</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience wrap" id="experience">
+    <h2>Experience</h2>
+    <ul class="timeline">
+      <li>
+        <div class="timeline-role">
+          <h3>Lead Product Analyst</h3>
+          <span class="mono">Banco Plata · Mexico City</span>
+        </div>
+        <p>Mar 2026 – Present</p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Causal Inference Research Consultant</h3>
+          <span class="mono">VkusVill · Remote</span>
+        </div>
+        <p>Jun 2026 – Present</p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Product Analytics Team Lead</h3>
+          <span class="mono">HeadHunter (hh.ru) · Moscow</span>
+        </div>
+        <p>Oct 2023 – Apr 2026</p>
+      </li>
+      <li>
+        <div class="timeline-role">
+          <h3>Product Analyst</h3>
+          <span class="mono">OZON.ru · Moscow</span>
+        </div>
+        <p>Sep 2022 – Oct 2023</p>
+      </li>
+    </ul>
+  </section>

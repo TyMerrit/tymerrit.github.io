@@ -23,7 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 {% feed_meta %}
-{% if page.url == "/" or page.url == "/about/" %}<script type="application/ld+json">
+{% if page.url == "/" %}<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
