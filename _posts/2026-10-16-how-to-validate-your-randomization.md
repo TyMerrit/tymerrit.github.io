@@ -54,27 +54,22 @@ Two practical consequences. First, **check the exposure layer directly instead o
 
 Most platforms recompute SRM every day. That's a repeated significance test, and everything we know about peeking applies to it.
 
-![Monitoring SRM is repeated testing: false alarm and detection rates per monitoring rule. p < 0.05 daily: 21.8% false alarms, 98% detection. p < 0.001 daily: 0.7%, 73%. p < 0.001 hourly: 2.0%, 77%. Anytime-valid at α = 0.001: 0.0%, 41%. Anytime-valid with calibrated α: 0.6%, 74%. p < 0.001 at the end only: 0.1%, 67%.](/images/posts/srm-monitoring.png)
-*14-day test, 10,000 users per day, 20,000 simulated tests per rule. Orange: false alarms when the split is truly 50/50. Blue: detection when it's 49.5/50.5.*
+![Monitoring SRM is repeated testing: false alarm and detection rates per monitoring rule. p < 0.05 daily: 22.1% false alarms, 99% detection. p < 0.001 daily: 0.7%, 84%. p < 0.001 hourly: 2.0%, 87%. Anytime-valid at α = 0.001: 0.0%, 56%. Anytime-valid with calibrated α: 0.8%, 84%. p < 0.001 at the end only: 0.1%, 80%.](/images/posts/srm-monitoring.png)
+*14-day test with ~12,200 users per day, sized so that a single check at the end has the textbook 80% power against a 49.5/50.5 split. 20,000 simulated tests per rule. Orange: false alarms when the split is truly 50/50. Blue: detection when it's 49.5/50.5.*
 
-Check SRM daily at α = 0.05, and about one healthy test in five raises a false alarm (21.8%). A strict threshold fixes most of it: 14 daily looks at p < 0.001 can't exceed 1.4% false alarms by a plain union bound, and in practice give 0.7%, while still catching a half-point SRM 73% of the time.
+The rightmost pair is the reference: one chi-square check at the end of the test, 0.1% false alarms and 80% power. Check SRM daily at α = 0.05 instead, and about one healthy test in five raises a false alarm (22%). A strict threshold fixes most of it: 14 daily looks at p < 0.001 can't exceed 1.4% false alarms by a plain union bound, give 0.7% in practice, and catch the half-point SRM 84% of the time, slightly more than the single end-of-test check, because daily looks give it more chances.
 
-What about anytime-valid inference, the textbook fix for peeking? At the same nominal α = 0.001 it looks weak: 41% detection. But that comparison is unfair. Ville's inequality, which gives these methods their guarantee, is conservative, and the realized false alarm rate is around 0.01%. Calibrate the anytime-valid test to the same realized false alarm rate as daily chi-square, and the gap disappears: 74% detection, and slightly earlier, because it can look every hour. The catch is that a calibrated threshold is only guaranteed for the traffic, horizon and look schedule it was calibrated on.
+What about anytime-valid inference, the textbook fix for peeking? At the same nominal α = 0.001 it looks weak: 56% detection, well below the 80% reference. But that comparison is unfair. Ville's inequality, which gives these methods their guarantee, is conservative, and the realized false alarm rate is around 0.03%. Calibrate the anytime-valid test to the same realized false alarm rate as daily chi-square, and the gap disappears: 84% detection, and about a day earlier, because it can look every hour. The catch is that a calibrated threshold is only guaranteed for the traffic, horizon and look schedule it was calibrated on.
 
 So the honest conclusion is boring. If you look once a day, a strict fixed threshold is simple and just as good. Anytime-valid methods earn their keep when you monitor continuously and need a guarantee that holds whenever you look. What doesn't work is the default most people start with: α = 0.05, checked every morning.
 
 ## Validating the platform itself
 
-Everything above validates individual experiments. The platform needs its own checks, and they come in two kinds.
+Everything above validates individual experiments. The assignment machinery underneath needs its own checks, run once and again after every change to it.
 
-**Offline checks on assignment.** Push a few hundred thousand synthetic IDs through your hashing function and check three things: buckets come out uniform, assignment is deterministic, and two different experiments assign independently. Each check exists because each catches a bug the others miss. A modulo-bias bug (two hex digits mod 100) gives a 58.5/41.5 split and fails uniformity, but it's perfectly deterministic and independent. A shared-salt bug, where every experiment splits users identically, passes uniformity and determinism and only fails the independence check. Two "independent" experiments that are perfectly correlated are not independent.
+Push a few hundred thousand synthetic IDs through your hashing function and check three things: buckets come out uniform, assignment is deterministic, and two different experiments assign independently. Each check exists because each catches a bug the others miss. A modulo-bias bug (two hex digits mod 100) gives a 58.5/41.5 split and fails uniformity, but it's perfectly deterministic and independent. A shared-salt bug, where every experiment splits users identically, passes uniformity and determinism and only fails the independence check. Two "independent" experiments that are perfectly correlated are not independent.
 
-**A/A replays on historical data.** Instead of one live A/A test, take historical data, draw a few hundred random splits, and push each through your actual analysis code. The share of significant results should sit within binomial noise around α, and the p-values should be uniform.
-
-![500 A/A replays on the same data: p-value histograms. Unit-level analysis is flat, with p < 0.05 in 5% of replays; session-level analysis piles up near zero, with p < 0.05 in 42% of replays.](/images/posts/aa-replay-pvalues.png)
-*500 A/A replays on the same session-level data. Left: aggregate to the user first. Right: treat every session as independent.*
-
-Same data, two analyses. Aggregating to the randomization unit gives a 5% false positive rate. Treating sessions as independent gives 42%. A single live A/A test would most likely have passed either one.
+Then run a live A/A test through the real platform, end to end. It won't tell you much about statistical calibration (that's one draw, as we saw at the start), but it exercises the parts that offline tests can't: real clients, real logging, real joins. Run every check from this post on it. Whether your analysis code itself is calibrated is a different question, and it belongs to the next level of the pyramid.
 
 ## From signals to decisions
 
@@ -109,7 +104,7 @@ About 1% of healthy experiments get blocked. That's the price of running around 
 
 If you automate nothing else, automate this:
 
-1. Validate the platform once and after every change: hash uniformity, determinism, independence, and an A/A replay through your real analysis code.
+1. Validate the assignment machinery once and after every change: hash uniformity, determinism, independence, plus a live A/A test through the real platform.
 2. SRM on every test at p < 0.001, or an anytime-valid version if you look continuously.
 3. Exposure/assignment ratio per variant, overall and within the segments where logging is known to break.
 4. A count of units that appear in more than one variant.
